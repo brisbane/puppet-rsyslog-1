@@ -1,4 +1,4 @@
-class  rsyslog {
+class  rsyslog( $remotelogger  = $rsyslog::params::remotelogger ) inherits rsyslog::params {
  
   ensure_packages ( ['rsyslog' ] )  
   service { 'rsyslog':
@@ -10,9 +10,10 @@ class  rsyslog {
     require => Package['rsyslog']
   }
 
-  $remotelogger  = hiera('rsyslog::remotelogger',undef)
+#  notify { "logging to $remotelogger" : }
 
-  if $remotelogger == "pplogger" {
+  if ( "$remotelogger" == "pplogger") {
+
 
    file { '/etc/rsyslog.conf' :
     source  => "puppet:///modules/$module_name/rsyslog.conf.local",

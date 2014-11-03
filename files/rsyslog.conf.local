@@ -62,6 +62,7 @@ local7.*                                                /var/log/boot.log
 
 # PDG setup central syslogger
 *.debug                                                 @pplogger
+*.debug                                                 @logger:51400
 
 
 # ### begin forwarding rule ###
